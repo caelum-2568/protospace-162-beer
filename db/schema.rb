@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_21_132204) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_22_021628) do
   create_table "protos", charset: "utf8", force: :cascade do |t|
     t.text "image"
     t.string "name"
@@ -18,6 +18,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_21_132204) do
     t.string "user"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "prototypes", charset: "utf8", force: :cascade do |t|
+    t.string "title"
+    t.text "catch_copy"
+    t.text "concept"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_prototypes_on_user_id"
   end
 
 end
