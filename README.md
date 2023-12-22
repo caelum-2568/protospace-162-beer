@@ -31,5 +31,5 @@
 |prototype                  |references       |null : false , foreign_key: true |
 |user                       |references       |null : false , foreign_key: true |
 ### Association
-belongs_to : user  #users テーブルとのアソシエーション
-belongs_to :  prototype  #prototypes テーブルとのアソシエーション
+- belongs_to : user  #users テーブルとのアソシエーション
+- belongs_to :  prototype  #prototypes テーブルとのアソシエーション
