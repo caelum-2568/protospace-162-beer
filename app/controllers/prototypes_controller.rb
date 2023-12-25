@@ -5,6 +5,7 @@ class PrototypesController < ApplicationController
   end
 
   def new
+
     @prototype = Prototype.new
   end
 
@@ -16,6 +17,7 @@ class PrototypesController < ApplicationController
     else
       redirect_to new_prototype_path, alert: '保存に失敗しました。もう一度試してください。'
     end
+
   end
 end
 
