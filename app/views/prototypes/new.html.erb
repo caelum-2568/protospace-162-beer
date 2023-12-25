@@ -2,7 +2,6 @@
   <div class="inner">
     <div class="form__wrapper">
       <h2 class="page-heading">新規プロトタイプ投稿</h2>
-        <%= render partial: 'form', collection: @prototypes %>
-    </div>
+        <%= render partial: 'form', locals: { prototype: @prototype } %>
   </div>
 </div>
