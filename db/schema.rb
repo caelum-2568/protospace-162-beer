@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_22_021628) do
-  create_table "protos", charset: "utf8", force: :cascade do |t|
-    t.text "image"
-    t.string "name"
-    t.string "copy"
-    t.string "user"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2023_12_22_051638) do
   create_table "prototypes", charset: "utf8", force: :cascade do |t|
     t.string "title"
     t.text "catch_copy"
@@ -28,6 +19,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_22_021628) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_prototypes_on_user_id"
+  end
+
+  create_table "users", charset: "utf8", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "name"
+    t.text "profile"
+    t.text "occupation"
+    t.text "position"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end
