@@ -5,17 +5,16 @@ class PrototypesController < ApplicationController
   end
 
   def new
-
     @prototype = Prototype.new
   end
 
   def create
-    @prototype = Prototype.new(prototype_params)
+    @prototype = Prototype.create(prototype_params)
   
     if @prototype.save
       redirect_to root_path, notice: 'データを保存しました。'
     else
-      redirect_to new_prototype_path, alert: '保存に失敗しました。もう一度試してください。'
+      render :new, status: :unprocessable_entity, alert: '保存に失敗しました。もう一度試してください。'
     end
 
   end
