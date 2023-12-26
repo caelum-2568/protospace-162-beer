@@ -9,13 +9,8 @@
     <%# // ログインしているときは上記を表示する %>
     <% end %>
 
-    <% if user_signed_in? && current_user == prototype.user %>
-    <div class="prototype__manage">
-      <%= link_to "編集する", edit_prototype_path(prototype), class: :prototype__btn %>
-      <%= link_to "削除する", prototype_path(prototype), method: :delete, class: :prototype__btn %>
-    </div>
-    <% end %>
-
+    # ※不要記述削除しました
+  
     <div class="card__wrapper">
       <%# 投稿機能実装後、部分テンプレートでプロトタイプ投稿一覧を表示する %>
       <%= render partial: 'prototype',collection: @prototypes %>
