@@ -1,6 +1,6 @@
 class Prototype < ApplicationRecord
-  belongs_to :user #users テーブルとのアソシエーション
-  #has_many :comment #comments テーブルとのアソシエーション
+  belongs_to :user # users テーブルとのアソシエーション
+  # has_many :comment #comments テーブルとのアソシエーション
   has_one_attached :image
 
   validates :title, presence: true
@@ -9,7 +9,7 @@ class Prototype < ApplicationRecord
   validates :image, presence: true
 
   def self.search(search)
-    if search != ""
+    if search != ''
       Prototype.where('text LIKE(?)', "%#{search}%")
     else
       Prototype.all
