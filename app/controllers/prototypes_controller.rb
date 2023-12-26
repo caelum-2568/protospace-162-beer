@@ -17,6 +17,12 @@ class PrototypesController < ApplicationController
     else
       render :new, status: :unprocessable_entity, alert: '保存に失敗しました。もう一度試してください。'
     end
+
+    def destroy
+      prototype = Prototype.find(params[:id])
+      prototype.destroy
+      redirect_to root_path
+    end
   end
 
 
