@@ -1,5 +1,5 @@
 class PrototypesController < ApplicationController
-  before_action :move_to_index, only: [:new]
+  before_action :move_to_new, only: [:new]
 
   def index
     @prototypes = Prototype.all
@@ -25,9 +25,9 @@ class PrototypesController < ApplicationController
     params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
   end
 
-  def move_to_index
+  def move_to_new
     unless user_signed_in?
-      redirect_to action: :index
+      redirect_to user_session_path
     end
   end
 end
