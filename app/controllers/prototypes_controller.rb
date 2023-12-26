@@ -1,4 +1,5 @@
 class PrototypesController < ApplicationController
+  before_action :move_to_index, only: [:new]
 
   def index
     @prototypes = Prototype.all
@@ -16,11 +17,17 @@ class PrototypesController < ApplicationController
     else
       render :new, status: :unprocessable_entity, alert: '保存に失敗しました。もう一度試してください。'
     end
-
   end
-end
 
-private
-def prototype_params
-  params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
+
+  private
+  def prototype_params
+    params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
+  end
+
+  def move_to_index
+    unless user_signed_in?
+      redirect_to action: :index
+    end
+  end
 end
