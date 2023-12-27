@@ -1,22 +1,23 @@
 class PrototypesController < ApplicationController
-  before_action :move_to_new, only: [:new]
-  before_action :move_to_index, only: [:edit]
-  
+    before_action :move_to_new, only: [:new, :destroy]
+    before_action :move_to_index, only: [:edit]
+    
 
-  def index
-    @prototypes = Prototype.all
-  end
+    def index
+      @prototypes = Prototype.all
+    end
 
-  def new
-    @prototype = Prototype.new
-  end
+    def new
+      @prototype = Prototype.new
+    end
 
-  def create
-    @prototype = Prototype.create(prototype_params)
-    if @prototype.save
-      redirect_to root_path, notice: 'データを保存しました。'
-    else
-      render :new, status: :unprocessable_entity, alert: '保存に失敗しました。もう一度試してください。'
+    def create
+      @prototype = Prototype.create(prototype_params)
+      if @prototype.save
+        redirect_to root_path, notice: 'データを保存しました。'
+      else
+        render :new, status: :unprocessable_entity, alert: '保存に失敗しました。もう一度試してください。'
+      end
     end
 
     def destroy
@@ -24,48 +25,48 @@ class PrototypesController < ApplicationController
       prototype.destroy
       redirect_to root_path
     end
-  end
 
 
-  def edit
-    @prototype = Prototype.find(params[:id])
-  end
-  
-  def show
-    @prototype = Prototype.find(params[:id])
-  end
 
-  def update
-    @prototype = Prototype.find(params[:id])
-    if @prototype.update(prototype_params)
-      redirect_to root_path, notice: 'データを更新しました。'
-    else
-      render :edit
+    def edit
+      @prototype = Prototype.find(params[:id])
     end
-  end
-  
-  private
+    
+    def show
+      @prototype = Prototype.find(params[:id])
+    end
 
-  def prototype_params
-    params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
-  end
+    def update
+      @prototype = Prototype.find(params[:id])
+      if @prototype.update(prototype_params)
+        redirect_to root_path, notice: 'データを更新しました。'
+      else
+        render :edit
+      end
+    end
+    
+    private
 
-  def move_to_new
-    return if user_signed_in?
+    def prototype_params
+      params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
+    end
 
-    redirect_to user_session_path
-  end
+    def move_to_new
+      return if user_signed_in?
 
- def move_to_index
-   @prototype = Prototype.find(params[:id])
-   if user_signed_in? && current_user == @prototype.user
-     return 
-   elsif user_signed_in? && current_user != @prototype.user 
-     redirect_to root_path
-   else
       redirect_to user_session_path
-   end    
- end
+    end
+
+  def move_to_index
+    @prototype = Prototype.find(params[:id])
+    if user_signed_in? && current_user == @prototype.user
+      return 
+    elsif user_signed_in? && current_user != @prototype.user 
+      redirect_to root_path
+    else
+        redirect_to user_session_path
+    end    
+  end
 end
 
 
