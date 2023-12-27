@@ -1,7 +1,6 @@
 class Prototype < ApplicationRecord
 
   belongs_to :user # users テーブルとのアソシエーション
-  # has_many :comment #comments テーブルとのアソシエーション
   has_one_attached :image
   has_many :comments, dependent: :destroy
 
