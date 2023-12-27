@@ -57,7 +57,6 @@ class PrototypesController < ApplicationController
    elsif user_signed_in? && current_user != @prototype.user 
      redirect_to root_path
    else
-      return if user_signed_in?
       redirect_to user_session_path
    end    
  end
