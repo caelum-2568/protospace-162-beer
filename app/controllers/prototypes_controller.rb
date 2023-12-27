@@ -1,5 +1,7 @@
 class PrototypesController < ApplicationController
   before_action :move_to_new, only: [:new]
+  before_action :move_to_index, only: [:edit]
+  
 
   def index
     @prototypes = Prototype.all
@@ -47,4 +49,32 @@ class PrototypesController < ApplicationController
 
     redirect_to user_session_path
   end
+
+ def move_to_index
+   @prototype = Prototype.find(params[:id])
+   if user_signed_in? && current_user == @prototype.user
+     return 
+   elsif user_signed_in? && current_user != @prototype.user 
+     redirect_to root_path
+   else
+      return if user_signed_in?
+      redirect_to user_session_path
+   end    
+ end
 end
+
+
+#def move_to_index
+ # @prototype = Prototype.find(params[:id])
+ # def  move_to_signed_in
+    
+ #return if user_signed_in? && current_user == @prototype.user
+
+  #  redirect_to root_path, alert: '他人の投稿を編集する権限がありません。'
+  #end
+ # unless user_signed_in?
+   # redirect_to user_session_path
+#  end  
+
+#  end  
+#end
