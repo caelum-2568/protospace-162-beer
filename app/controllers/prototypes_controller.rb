@@ -11,7 +11,6 @@ class PrototypesController < ApplicationController
 
   def create
     @prototype = Prototype.create(prototype_params)
-
     if @prototype.save
       redirect_to root_path, notice: 'データを保存しました。'
     else
@@ -19,10 +18,23 @@ class PrototypesController < ApplicationController
     end
   end
 
+
+  def edit
+  end
+  
   def show
     @prototype = Prototype.find(params[:id])
   end
 
+  def update
+    @prototype = Prototype.find(params[:id])
+    if @prototype.update(prototype_params)
+      redirect_to root_path, notice: 'データを更新しました。'
+    else
+      render :edit
+    end
+  end
+  
   private
 
   def prototype_params
