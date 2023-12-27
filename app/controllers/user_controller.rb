@@ -1,6 +1,5 @@
 class UserController < ApplicationController
-  def show
-    # showアクションの処理を記述
+  def show 
     @user = User.find(params[:id])
   end
 end
