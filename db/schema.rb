@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.0].define(version: 2023_12_22_075656) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_25_044136) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -40,8 +39,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_22_075656) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-
-ActiveRecord::Schema[7.0].define(version: 2023_12_22_051638) do
+  create_table "comments", charset: "utf8", force: :cascade do |t|
+    t.text "content"
+    t.bigint "prototype_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prototype_id"], name: "index_comments_on_prototype_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "prototypes", charset: "utf8", force: :cascade do |t|
     t.string "title"
@@ -52,10 +58,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_22_051638) do
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_prototypes_on_user_id"
   end
-
-
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
 
   create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -73,5 +75,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_22_051638) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
 end
