@@ -40,7 +40,7 @@ class PrototypesController < ApplicationController
   def update
   @prototype = Prototype.find(params[:id])
   if @prototype.update(prototype_params)
-    redirect_to root_path, notice: 'データを更新しました。'
+    redirect_to prototype_path(@prototype.id), notice: 'データを更新しました。'
   else
     render :edit
   end
