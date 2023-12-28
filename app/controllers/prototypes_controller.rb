@@ -42,7 +42,7 @@ class PrototypesController < ApplicationController
   if @prototype.update(prototype_params)
     redirect_to prototype_path(@prototype.id), notice: 'データを更新しました。'
   else
-    render :edit
+    render :edit, status: :unprocessable_entity, alert: '保存に失敗しました。もう一度試してください。'
   end
   end
 
